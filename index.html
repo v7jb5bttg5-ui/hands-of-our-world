@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hands of Our World, a gesture-based interactive media art experience."
+    />
+    <title>Hands of Our World</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="landingPage" class="page page-landing">
+      <header class="topbar">
+        <span class="site-name">Hands of Our World</span>
+        <div class="language-switcher" aria-label="Language">
+          <button class="language-button is-active" type="button" data-lang="en">English</button>
+          <button class="language-button" type="button" data-lang="ko">Korean</button>
+          <button class="language-button" type="button" data-lang="zh">Chinese</button>
+        </div>
+      </header>
+
+      <main class="landing-center">
+        <p class="kicker" data-i18n="landingKicker">Interactive media art</p>
+        <h1 data-i18n="title">Hands of Our World</h1>
+        <p class="subtitle" data-i18n="subtitle">A gesture-based interactive experience</p>
+        <button id="startTutorialButton" class="primary-button" type="button" data-i18n="start">
+          Start
+        </button>
+      </main>
+    </div>
+
+    <div id="tutorialPage" class="page page-tutorial" hidden>
+      <header class="topbar">
+        <button id="backToLandingButton" class="quiet-button" type="button" data-i18n="back">
+          Back
+        </button>
+        <div class="language-switcher" aria-label="Language">
+          <button class="language-button is-active" type="button" data-lang="en">English</button>
+          <button class="language-button" type="button" data-lang="ko">Korean</button>
+          <button class="language-button" type="button" data-lang="zh">Chinese</button>
+        </div>
+      </header>
+
+      <main class="tutorial-shell">
+        <div class="step-count" id="stepCount">1 / 5</div>
+        <section class="tutorial-panel" aria-live="polite">
+          <div id="gestureIcon" class="gesture-icon" aria-hidden="true"></div>
+          <p class="kicker" id="gestureLabel">Open Palm</p>
+          <h2 id="tutorialInstruction">Open one hand toward the camera.</h2>
+          <p id="tutorialFeedback" class="feedback">
+            A burst of warm particles and an opening sound will appear.
+          </p>
+          <div id="tutorialDots" class="tutorial-dots" aria-hidden="true"></div>
+          <button id="nextTutorialButton" class="primary-button" type="button">Next</button>
+        </section>
+      </main>
+    </div>
+
+    <div id="artworkPage" class="page page-artwork" hidden>
+      <div class="artwork-controls">
+        <div class="language-switcher artwork-language" aria-label="Language">
+          <button class="language-button is-active" type="button" data-lang="en">English</button>
+          <button class="language-button" type="button" data-lang="ko">Korean</button>
+          <button class="language-button" type="button" data-lang="zh">Chinese</button>
+        </div>
+        <button id="helpButton" class="help-button" type="button" data-i18n="help">Help</button>
+      </div>
+      <main id="artworkMount" class="artwork-mount" aria-label="Hands of Our World artwork">
+        <div id="cameraStatus" class="camera-status" hidden>
+          <strong id="cameraStatusTitle">Starting camera</strong>
+          <span id="cameraStatusText">Please allow camera access in the browser.</span>
+          <button id="retryCameraButton" class="retry-camera-button" type="button" hidden>
+            Retry Camera
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <div id="helpModal" class="modal" hidden>
+      <div class="modal-backdrop" data-close-help></div>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="modal-header">
+          <h2 id="helpTitle" data-i18n="helpTitle">Gesture Guide</h2>
+          <button id="closeHelpButton" class="icon-button" type="button" aria-label="Close" data-close-help>
+            <span aria-hidden="true">x</span>
+          </button>
+        </div>
+        <div id="helpList" class="help-list"></div>
+      </section>
+    </div>
+
+    <script src="./sketch.js"></script>
+    <script src="./ui.js"></script>
+  </body>
+</html>
